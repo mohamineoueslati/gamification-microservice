@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/leaders")
 @RequiredArgsConstructor
-class LeaderBoardController {
+public class LeaderBoardController {
 
     private final LeaderBoardService leaderBoardService;
 
