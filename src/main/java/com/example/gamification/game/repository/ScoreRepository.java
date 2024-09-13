@@ -36,7 +36,7 @@ public interface ScoreRepository extends JpaRepository<ScoreCard, Long> {
         select new com.example.gamification.game.dto.TotalScoreDTO(sc.userId, sum(sc.score))
         from ScoreCard sc
         group by sc.userId
-        order by sum(sc.score)
+        order by sum(sc.score) desc
     """)
     List<TotalScoreDTO> getSortedTotalScores();
 
