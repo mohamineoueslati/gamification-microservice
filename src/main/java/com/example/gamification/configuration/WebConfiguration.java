@@ -1,4 +1,4 @@
-package com.example.gamification.game.configuration;
+package com.example.gamification.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
