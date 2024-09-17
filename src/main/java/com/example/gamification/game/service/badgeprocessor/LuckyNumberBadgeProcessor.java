@@ -2,7 +2,7 @@ package com.example.gamification.game.service.badgeprocessor;
 
 import com.example.gamification.game.domain.BadgeType;
 import com.example.gamification.game.domain.ScoreCard;
-import com.example.gamification.game.dto.ChallengeSolvedDTO;
+import com.example.gamification.game.event.ChallengeSolvedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class LuckyNumberBadgeProcessor implements BadgeProcessor {
     public Optional<BadgeType> processForOptionalBadge(
             int currentScore,
             List<ScoreCard> scoreCardList,
-            ChallengeSolvedDTO solvedChallenge
+            ChallengeSolvedEvent solvedChallenge
     ) {
         return solvedChallenge.factorA() == 41 || solvedChallenge.factorB() == 41 ?
                 Optional.of(BadgeType.LUCKY_NUMBER) :

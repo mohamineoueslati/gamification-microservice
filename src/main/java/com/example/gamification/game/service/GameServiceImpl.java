@@ -3,11 +3,12 @@ package com.example.gamification.game.service;
 import com.example.gamification.game.domain.BadgeCard;
 import com.example.gamification.game.domain.BadgeType;
 import com.example.gamification.game.domain.ScoreCard;
-import com.example.gamification.game.dto.ChallengeSolvedDTO;
+import com.example.gamification.game.event.ChallengeSolvedEvent;
 import com.example.gamification.game.dto.GameResultDTO;
 import com.example.gamification.game.repository.BadgeRepository;
 import com.example.gamification.game.repository.ScoreRepository;
 import com.example.gamification.game.service.badgeprocessor.BadgeProcessor;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,9 @@ public class GameServiceImpl implements GameService {
     private final BadgeRepository badgeRepository;
     private final List<BadgeProcessor> badgeProcessors;
 
+    @Transactional
     @Override
-    public GameResultDTO newAttemptForUser(ChallengeSolvedDTO challenge) {
+    public GameResultDTO newAttemptForUser(ChallengeSolvedEvent challenge) {
         // We give points only if it's correct
         if (challenge.correct()) {
             ScoreCard scoreCard = new ScoreCard(challenge.userId(), challenge.attemptId());
@@ -56,7 +58,7 @@ public class GameServiceImpl implements GameService {
     /**
      * Checks the total score and the different scorecards obtained to give new badges in case their conditions are met.
      */
-    private List<BadgeCard> processForBadges(final ChallengeSolvedDTO solvedChallenge) {
+    private List<BadgeCard> processForBadges(final ChallengeSolvedEvent solvedChallenge) {
         Optional<Integer> optTotalScore = scoreRepository.getTotalScoreForUser(solvedChallenge.userId());
         if (optTotalScore.isEmpty()) return Collections.emptyList();
         int totalScore = optTotalScore.get();

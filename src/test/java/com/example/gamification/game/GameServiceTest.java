@@ -3,7 +3,7 @@ package com.example.gamification.game;
 import com.example.gamification.game.domain.BadgeCard;
 import com.example.gamification.game.domain.BadgeType;
 import com.example.gamification.game.domain.ScoreCard;
-import com.example.gamification.game.dto.ChallengeSolvedDTO;
+import com.example.gamification.game.event.ChallengeSolvedEvent;
 import com.example.gamification.game.dto.GameResultDTO;
 import com.example.gamification.game.repository.BadgeRepository;
 import com.example.gamification.game.repository.ScoreRepository;
@@ -42,7 +42,7 @@ public class GameServiceTest {
     public void processCorrectAttempt() {
         // given
         long userId = 1L, attemptId = 10L;
-        var attempt = new ChallengeSolvedDTO(attemptId, true, 20, 70, userId, "amine");
+        var attempt = new ChallengeSolvedEvent(attemptId, true, 20, 70, userId, "amine");
         ScoreCard scoreCard = new ScoreCard(userId, attemptId);
         given(scoreRepository.getTotalScoreForUser(userId)).willReturn(Optional.of(10));
         given(scoreRepository.findByUserIdOrderByScoreTimestampDesc(userId)).willReturn(List.of(scoreCard));
@@ -63,7 +63,7 @@ public class GameServiceTest {
     public void processWrongAttempt() {
         // given
         long userId = 1L, attemptId = 10L;
-        var attempt = new ChallengeSolvedDTO(attemptId, false, 10, 10, userId, "amine");
+        var attempt = new ChallengeSolvedEvent(attemptId, false, 10, 10, userId, "amine");
         // when
         final var gameResult = gameService.newAttemptForUser(attempt);
         // then

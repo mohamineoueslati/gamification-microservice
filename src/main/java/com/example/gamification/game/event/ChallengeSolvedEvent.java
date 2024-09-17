@@ -1,6 +1,6 @@
-package com.example.gamification.game.dto;
+package com.example.gamification.game.event;
 
-public record ChallengeSolvedDTO(
+public record ChallengeSolvedEvent(
         long attemptId,
         boolean correct,
         int factorA,

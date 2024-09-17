@@ -2,7 +2,7 @@ package com.example.gamification.game.service.badgeprocessor;
 
 import com.example.gamification.game.domain.BadgeType;
 import com.example.gamification.game.domain.ScoreCard;
-import com.example.gamification.game.dto.ChallengeSolvedDTO;
+import com.example.gamification.game.event.ChallengeSolvedEvent;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +17,7 @@ public interface BadgeProcessor {
     Optional<BadgeType> processForOptionalBadge(
             int currentScore,
             List<ScoreCard> scoreCardList,
-            ChallengeSolvedDTO solvedChallenge
+            ChallengeSolvedEvent solvedChallenge
     );
 
     /**

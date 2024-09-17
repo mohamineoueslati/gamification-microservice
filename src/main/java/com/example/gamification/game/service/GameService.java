@@ -1,6 +1,6 @@
 package com.example.gamification.game.service;
 
-import com.example.gamification.game.dto.ChallengeSolvedDTO;
+import com.example.gamification.game.event.ChallengeSolvedEvent;
 import com.example.gamification.game.dto.GameResultDTO;
 
 /**
@@ -13,5 +13,5 @@ public interface GameService {
      * @param challenge the challenge data with user details, factors, etc.
      * @return a {@link GameResultDTO} object containing the new score and badge cards obtained
      */
-    GameResultDTO newAttemptForUser(ChallengeSolvedDTO challenge);
+    GameResultDTO newAttemptForUser(ChallengeSolvedEvent challenge);
 }
